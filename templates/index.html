@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        body {
+            background-color: black;
+            color: purple;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #222;
+            padding: 10px;
+            margin: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+        .concluida {
+            text-decoration: line-through;
+            color: gray;
+        }
+        button {
+            background-color: purple;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        input {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    
+    <form action="/adicionar" method="POST">
+        <input type="text" name="conteudo" placeholder="Nova Tarefa" required>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <ul>
+        {% for tarefa in tarefas %}
+        <li class="{% if tarefa[2] == 1 %}concluida{% endif %}">
+            {{ tarefa[1] }}
+            <a href="/concluir/{{ tarefa[0] }}"><button>✔</button></a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
